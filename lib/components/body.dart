@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quize_app/components/progress_bar.dart';
 import 'package:flutter_quize_app/constants.dart';
 import 'package:websafe_svg/websafe_svg.dart';
 
@@ -16,10 +17,7 @@ class Body extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
             child: Column(
-              children: [
-                Container(
-                    width: double.infinity, height: 35, color: Colors.white),
-              ],
+              children: [ProgressBar()],
             ),
           ),
         )
