@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quize_app/constants.dart';
+import 'package:flutter_quize_app/controllers/question_controller.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:websafe_svg/websafe_svg.dart';
 
 class ProgressBar extends StatelessWidget {
@@ -16,30 +18,37 @@ class ProgressBar extends StatelessWidget {
         border: Border.all(color: Color(0xFF3F4768), width: 3),
         borderRadius: BorderRadius.circular(50),
       ),
-      child: Stack(
-        children: [
-          LayoutBuilder(
-            builder: (context, constraints) => Container(
-              width: constraints.maxWidth * 0.5,
-              decoration: BoxDecoration(
-                gradient: kPrimaryGradient,
-                borderRadius: BorderRadius.circular(50),
+      child: GetBuilder<QuestionController>(
+        init: QuestionController(),
+        builder: (controller) {
+          print(controller.animation.value);
+          return Stack(
+            children: [
+              LayoutBuilder(
+                builder: (context, constraints) => Container(
+                  width: constraints.maxWidth * controller.animation.value,
+                  decoration: BoxDecoration(
+                    gradient: kPrimaryGradient,
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                ),
               ),
-            ),
-          ),
-          Positioned.fill(
-            child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("18 sec"),
-                    WebsafeSvg.asset("assets/icons/clock.svg")
-                  ],
-                )),
-          )
-        ],
+              Positioned.fill(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("18 sec"),
+                      WebsafeSvg.asset("assets/icons/clock.svg")
+                    ],
+                  ),
+                ),
+              )
+            ],
+          );
+        },
       ),
     );
   }
